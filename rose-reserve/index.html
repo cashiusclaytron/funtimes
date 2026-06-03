@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rose &amp; Reserve — Pasadena Luxury Real Estate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Archivo:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#fbf9f5;          /* brighter base */
+    --paper-2:#f3eee6;        /* warm secondary */
+    --ink:#13241f;            /* deep forest — second tone */
+    --ink-soft:#465a52;
+    --rose:#c97b78;           /* crisper rose */
+    --rose-deep:#a85451;
+    --rose-soft:#f6e3e1;
+    --line:#e3ddd1;
+    --gold:#b08a4f;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Archivo',sans-serif;
+    font-weight:300;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--rose);color:var(--paper)}
+
+  .wrap{max-width:1240px;margin:0 auto;padding:0 40px}
+  .serif{font-family:'Fraunces',serif}
+  .eyebrow{
+    font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;
+    font-weight:500;color:var(--rose-deep);
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 40px;
+    background:rgba(244,240,233,0);
+    transition:background .4s ease, padding .4s ease, box-shadow .4s ease;
+  }
+  nav.scrolled{
+    background:rgba(244,240,233,.92);
+    backdrop-filter:blur(12px);
+    padding:14px 40px;
+    box-shadow:0 1px 0 var(--line);
+  }
+  .brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink)}
+  .brand .mark{width:30px;height:30px;flex:none}
+  .brand .name{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:500;letter-spacing:.01em}
+  .brand .amp{color:var(--rose-deep);font-style:italic}
+  .nav-links{display:flex;gap:38px;align-items:center}
+  .nav-links a{
+    text-decoration:none;color:var(--ink-soft);font-size:.82rem;
+    letter-spacing:.14em;text-transform:uppercase;font-weight:400;
+    position:relative;transition:color .3s;
+  }
+  .nav-links a:hover{color:var(--rose-deep)}
+  .nav-links a::after{
+    content:'';position:absolute;left:0;bottom:-6px;height:1px;width:0;
+    background:var(--rose-deep);transition:width .35s ease;
+  }
+  .nav-links a:hover::after{width:100%}
+  .nav-cta{
+    border:1px solid var(--ink);border-radius:40px;padding:9px 22px !important;
+    color:var(--ink) !important;transition:all .3s ease !important;
+  }
+  .nav-cta:hover{background:var(--ink);color:var(--paper) !important}
+  .nav-cta::after{display:none}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none}
+  .burger span{width:26px;height:2px;background:var(--ink);transition:.3s}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;min-height:100vh;display:flex;align-items:flex-end;
+    padding-bottom:8vh;
+    background:
+      linear-gradient(180deg, rgba(19,36,31,.30) 0%, rgba(19,36,31,.06) 38%, rgba(19,36,31,.66) 100%),
+      url('https://images.unsplash.com/photo-1713496130804-c313e91a209f?q=80&w=2400&auto=format&fit=crop') center 40%/cover no-repeat;
+  }
+  .hero .wrap{width:100%}
+  .hero-inner{max-width:880px}
+  .hero .eyebrow{color:#e9c9c9}
+  .hero h1{
+    color:var(--paper);
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:clamp(2.6rem,6.2vw,5.4rem);
+    line-height:1.02;letter-spacing:-.015em;
+    margin:22px 0 26px;
+    text-wrap:balance;
+  }
+  .hero h1 em{font-style:italic;color:#f0d2d2}
+  .hero p.lede{
+    color:#ece6dc;font-size:clamp(1rem,1.5vw,1.22rem);
+    max-width:560px;font-weight:300;
+  }
+  .hero-actions{display:flex;gap:18px;margin-top:38px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:.82rem;letter-spacing:.16em;text-transform:uppercase;font-weight:500;
+    padding:15px 30px;border-radius:44px;text-decoration:none;cursor:pointer;
+    transition:all .35s ease;border:1px solid transparent;
+  }
+  .btn-primary{background:var(--rose-deep);color:var(--paper)}
+  .btn-primary:hover{background:var(--paper);color:var(--ink);transform:translateY(-2px)}
+  .btn-ghost{border-color:rgba(244,240,233,.6);color:var(--paper)}
+  .btn-ghost:hover{background:rgba(244,240,233,.12);border-color:var(--paper)}
+  .scrollcue{
+    position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+    color:#ece6dc;font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;
+    display:flex;flex-direction:column;align-items:center;gap:8px;opacity:.85;
+  }
+  .scrollcue .bar{width:1px;height:40px;background:linear-gradient(var(--paper),transparent);animation:cue 2.2s infinite}
+  @keyframes cue{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- VALUE STRIP ---------- */
+  .strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--rose-soft)}
+  .strip .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+  .strip .cell{padding:46px 34px;border-right:1px solid rgba(168,84,81,.18)}
+  .strip .cell:last-child{border-right:none}
+  .strip .num{font-family:'Fraunces',serif;font-size:2.6rem;color:var(--rose-deep);font-weight:300;line-height:1}
+  .strip .cell h4{font-family:'Fraunces',serif;font-weight:500;font-size:1.15rem;margin:14px 0 8px;color:var(--ink)}
+  .strip .cell p{font-size:.94rem;color:var(--ink-soft)}
+
+  /* ---------- ABOUT ---------- */
+  .about{padding:120px 0}
+  .about .grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:70px;align-items:center}
+  .portrait{position:relative}
+  .portrait .frame{
+    position:relative;border-radius:4px;overflow:hidden;
+    box-shadow:0 30px 60px -25px rgba(28,26,23,.5);
+  }
+  .portrait img{width:100%;display:block;filter:grayscale(.15) contrast(1.02)}
+  .portrait .tag{
+    position:absolute;bottom:-22px;left:-22px;background:var(--ink);color:var(--paper);
+    padding:18px 26px;border-radius:3px;
+  }
+  .portrait .tag .nm{font-family:'Fraunces',serif;font-size:1.2rem}
+  .portrait .tag .rl{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:#cdb6b6;margin-top:3px}
+  .about h2{
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:clamp(2rem,3.6vw,3.1rem);line-height:1.08;letter-spacing:-.01em;
+    margin:18px 0 26px;text-wrap:balance;
+  }
+  .about h2 em{font-style:italic;color:var(--rose-deep)}
+  .about p{font-size:1.04rem;color:var(--ink-soft);margin-bottom:18px;max-width:54ch}
+  .sig{font-family:'Fraunces',serif;font-style:italic;font-size:1.5rem;color:var(--ink);margin-top:14px}
+
+  /* ---------- SERVICES ---------- */
+  .services{padding:110px 0;background:var(--ink);color:var(--paper)}
+  .services .head{max-width:640px;margin-bottom:64px}
+  .services .eyebrow{color:#d99e9e}
+  .services h2{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(2rem,3.6vw,3rem);line-height:1.1;margin-top:16px}
+  .svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(244,240,233,.14);border:1px solid rgba(244,240,233,.14)}
+  .svc{background:var(--ink);padding:46px 42px;transition:background .4s ease}
+  .svc:hover{background:#262320}
+  .svc .ix{font-family:'Fraunces',serif;font-size:.95rem;color:var(--gold);letter-spacing:.1em}
+  .svc h3{font-family:'Fraunces',serif;font-weight:400;font-size:1.6rem;margin:16px 0 12px}
+  .svc p{color:#c9c2b6;font-size:.98rem;font-weight:300}
+
+  /* ---------- QUOTE ---------- */
+  .quote{padding:120px 0;background:var(--paper-2);text-align:center}
+  .quote blockquote{
+    font-family:'Fraunces',serif;font-weight:300;font-style:italic;
+    font-size:clamp(1.7rem,3.4vw,2.7rem);line-height:1.25;
+    max-width:18ch;margin:0 auto;letter-spacing:-.01em;color:var(--ink);
+  }
+  .quote .rose-ico{margin:0 auto 30px;width:38px;height:38px;display:block}
+  .quote cite{display:block;margin-top:32px;font-style:normal;font-size:.8rem;letter-spacing:.22em;text-transform:uppercase;color:var(--rose-deep)}
+
+  /* ---------- AREAS ---------- */
+  .areas{padding:110px 0}
+  .areas .head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:54px;flex-wrap:wrap}
+  .areas h2{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(2rem,3.6vw,3rem);line-height:1.1;margin-top:14px;max-width:14ch}
+  .areas .head p{max-width:36ch;color:var(--ink-soft)}
+  .area-list{columns:3;column-gap:48px}
+  .area-list .a{
+    break-inside:avoid;display:flex;justify-content:space-between;align-items:baseline;
+    padding:16px 0;border-bottom:1px solid var(--line);
+  }
+  .area-list .a span{font-family:'Fraunces',serif;font-size:1.18rem}
+  .area-list .a small{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rose-deep)}
+
+  /* ---------- CONTACT ---------- */
+  .contact{
+    padding:120px 0;color:var(--paper);position:relative;
+    background:linear-gradient(rgba(19,36,31,.80),rgba(19,36,31,.86)),
+      url('https://images.unsplash.com/photo-1650651730532-818b21406382?q=80&w=2400&auto=format&fit=crop') center/cover fixed no-repeat;
+  }
+  .contact .grid{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center}
+  .contact h2{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(2.2rem,4vw,3.4rem);line-height:1.08;margin:16px 0 22px;text-wrap:balance}
+  .contact h2 em{font-style:italic;color:#f0d2d2}
+  .contact .lede{color:#ddd6ca;max-width:46ch;margin-bottom:30px}
+  .contact .eyebrow{color:#e9c9c9}
+  .form{background:rgba(244,240,233,.07);backdrop-filter:blur(6px);border:1px solid rgba(244,240,233,.18);border-radius:6px;padding:38px}
+  .field{margin-bottom:18px}
+  .field label{display:block;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:#c9c2b6;margin-bottom:7px}
+  .field input,.field textarea{
+    width:100%;background:rgba(244,240,233,.06);border:1px solid rgba(244,240,233,.22);
+    border-radius:4px;padding:13px 15px;color:var(--paper);font-family:'Archivo',sans-serif;font-size:.95rem;
+    transition:border .3s,background .3s;
+  }
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--rose);background:rgba(244,240,233,.1)}
+  .field textarea{resize:vertical;min-height:90px}
+  .form .btn-primary{width:100%;justify-content:center;border:none}
+  .contact-meta{margin-top:34px;display:flex;flex-direction:column;gap:14px}
+  .contact-meta a{color:var(--paper);text-decoration:none;font-size:1.05rem;display:flex;align-items:center;gap:12px;transition:color .3s}
+  .contact-meta a:hover{color:#f0d2d2}
+  .contact-meta .ico{width:18px;height:18px;flex:none;color:var(--rose)}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink);color:#9a948a;padding:40px 0}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+  footer .fbrand{display:flex;align-items:center;gap:10px;color:var(--paper);font-family:'Fraunces',serif;font-size:1.1rem}
+  footer .fbrand .amp{color:var(--rose-deep);font-style:italic}
+  footer .legal{font-size:.78rem;letter-spacing:.04em}
+  footer .legal a{color:#9a948a;text-decoration:none}
+  footer .legal a:hover{color:var(--paper)}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:900px){
+    .wrap{padding:0 26px}
+    nav{padding:18px 26px}
+    .nav-links{
+      position:fixed;inset:0 0 0 auto;width:78%;max-width:340px;background:var(--paper);
+      flex-direction:column;justify-content:center;gap:30px;padding:40px;
+      transform:translateX(100%);transition:transform .4s ease;box-shadow:-20px 0 60px -20px rgba(0,0,0,.3);
+    }
+    .nav-links.open{transform:none}
+    .burger{display:flex;z-index:60}
+    .strip .wrap{grid-template-columns:1fr}
+    .strip .cell{border-right:none;border-bottom:1px solid var(--line)}
+    .strip .cell:last-child{border-bottom:none}
+    .about .grid,.contact .grid{grid-template-columns:1fr;gap:48px}
+    .portrait{max-width:420px;margin:0 auto}
+    .svc-grid{grid-template-columns:1fr}
+    .area-list{columns:2}
+    .contact{background-attachment:scroll}
+  }
+  @media(max-width:540px){
+    .area-list{columns:1}
+    .hero-actions{flex-direction:column;align-items:stretch}
+    .btn{justify-content:center}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="brand" href="#top">
+    <svg class="mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="20" cy="20" r="19" stroke="#b06a6a" stroke-width="1.4"/>
+      <path d="M20 11c-3 0-5 2.2-5 5 0 2.4 1.6 4 3.3 4.8-1.9.5-3.8 2-3.8 4.7 0 .9.3 1.7.8 2.3M20 11c3 0 5 2.2 5 5 0 2.4-1.6 4-3.3 4.8 1.9.5 3.8 2 3.8 4.7 0 .9-.3 1.7-.8 2.3M20 11v18" stroke="#b06a6a" stroke-width="1.3" stroke-linecap="round"/>
+    </svg>
+    <span class="name">Rose <span class="amp">&amp;</span> Reserve</span>
+  </a>
+  <div class="nav-links" id="navlinks">
+    <a href="#about">The Advisor</a>
+    <a href="#services">Services</a>
+    <a href="#areas">Neighborhoods</a>
+    <a href="#contact" class="nav-cta">Book a Consult</a>
+  </div>
+  <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-inner reveal">
+      <span class="eyebrow">Pasadena &amp; the San Gabriel Valley</span>
+      <h1>The man who ran the household<br>now <em>protects your greatest asset.</em></h1>
+      <p class="lede">First a lawyer, then a full-time dad, now your agent. Which means I can read a 40-page contract, survive a toddler's negotiation tactics, and spot a bad deal from across the open house. Your next move deserves all three.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Start the Conversation</a>
+        <a href="#about" class="btn btn-ghost">Meet Dinesh</a>
+      </div>
+    </div>
+  </div>
+  <div class="scrollcue"><span>Scroll</span><span class="bar"></span></div>
+</header>
+
+<!-- VALUE STRIP -->
+<section class="strip">
+  <div class="wrap">
+    <div class="cell reveal"><div class="num">01</div><h4>A Lawyer's Eye</h4><p>I spent years in contracts before I sold a single home. The fine print that hides a bad deal? I read it for breakfast — usually while making someone else's.</p></div>
+    <div class="cell reveal"><div class="num">02</div><h4>Unhurried Counsel</h4><p>No pressure, no churn. I take a handful of clients at a time, so your transaction never feels like a number on someone's quota.</p></div>
+    <div class="cell reveal"><div class="num">03</div><h4>Rebel, Not Empire</h4><p>The market's full of agents who'd sell you a moon that's actually a space station. I'm the one on your side of the table — and I know which Craftsman has good bones and which only has good paint.</p></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="grid">
+      <div class="portrait reveal">
+        <div class="frame">
+          <img src="https://images.unsplash.com/photo-1680696489131-414c223cbca7?q=80&w=1400&auto=format&fit=crop" alt="Dinesh Joshi, founder of Rose &amp; Reserve">
+        </div>
+        <div class="tag"><div class="nm">Dinesh Joshi</div><div class="rl">Founder &amp; Lead Advisor</div></div>
+      </div>
+      <div class="copy reveal">
+        <span class="eyebrow">The Advisor</span>
+        <h2>Reformed lawyer. Retired dad-of-the-year. <em>Permanent ally.</em></h2>
+        <p>I started my career in law, where I learned that the most important part of any deal is the part nobody wants to read. Then I traded billable hours for bedtime stories and spent eight years as a stay-at-home dad — running budgets, managing chaos, and negotiating with people who do not accept "because I said so" as a closing argument.</p>
+        <p>Real estate, it turns out, is the two jobs combined. I read the contracts like the lawyer I was and I protect your home like the dad I still am. No high-pressure tactics, no "trust me" hand-waving — just a steady ally who's genuinely on your side. Think of me as the Obi-Wan of escrow: calm, a little gray in the beard, and very hard to trick.</p>
+        <p class="sig">— Dinesh</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">What I Do</span>
+      <h2>A short list of services, delivered with full attention.</h2>
+      <p style="color:#c9c2b6;font-size:1.02rem;margin-top:14px;max-width:52ch;">Four things, done properly. I'd rather be great at a few than mediocre at everything — a lesson every parent learns by about week two.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc reveal"><div class="ix">i.</div><h3>Buyer Representation</h3><p>From the first list-pull to the final walkthrough, I advocate only for you — flagging the things a quick tour won't reveal.</p></div>
+      <div class="svc reveal"><div class="ix">ii.</div><h3>Listing &amp; Sale</h3><p>Thoughtful staging, honest pricing, and marketing that respects your home's character instead of shouting over it.</p></div>
+      <div class="svc reveal"><div class="ix">iii.</div><h3>Relocation Guidance</h3><p>New to the San Gabriel Valley? I'll help you read the neighborhoods, the schools, and the trade-offs like a local.</p></div>
+      <div class="svc reveal"><div class="ix">iv.</div><h3>Investment &amp; Legacy</h3><p>Quiet counsel for second homes, income properties, and family estates — patient, discreet, and built for the long view.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote">
+  <div class="wrap reveal">
+    <svg class="rose-ico" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 8c-3.3 0-6 2.5-6 5.8 0 2.7 1.8 4.4 3.7 5.3-2.1.6-4.2 2.3-4.2 5.2 0 1 .3 1.9.9 2.6M20 8c3.3 0 6 2.5 6 5.8 0 2.7-1.8 4.4-3.7 5.3 2.1.6 4.2 2.3 4.2 5.2 0 1-.3 1.9-.9 2.6M20 8v24" stroke="#8f5151" stroke-width="1.4" stroke-linecap="round"/>
+    </svg>
+    <blockquote>"He caught a clause our last agent missed, then fixed the squeaky nursery door before we moved in. Lawyer brain, dad heart."</blockquote>
+    <cite>— A Bungalow Heaven family</cite>
+  </div>
+</section>
+
+<!-- AREAS -->
+<section class="areas" id="areas">
+  <div class="wrap">
+    <div class="head reveal">
+      <div>
+        <span class="eyebrow">Where I Work</span>
+        <h2>The neighborhoods I know by heart.</h2>
+      </div>
+      <p>Pasadena and its surrounding foothills, block by block — from craftsman enclaves to mid-century hideaways.</p>
+    </div>
+    <div class="area-list reveal">
+      <div class="a"><span>Bungalow Heaven</span><small>Craftsman</small></div>
+      <div class="a"><span>Madison Heights</span><small>Historic</small></div>
+      <div class="a"><span>San Rafael Hills</span><small>Estate</small></div>
+      <div class="a"><span>Prospect Park</span><small>Landmark</small></div>
+      <div class="a"><span>South Arroyo</span><small>Prestige</small></div>
+      <div class="a"><span>Old Pasadena</span><small>Urban</small></div>
+      <div class="a"><span>Hastings Ranch</span><small>Mid-Century</small></div>
+      <div class="a"><span>Linda Vista</span><small>Hillside</small></div>
+      <div class="a"><span>San Marino</span><small>Legacy</small></div>
+      <div class="a"><span>La Cañada</span><small>Foothill</small></div>
+      <div class="a"><span>Altadena</span><small>Eclectic</small></div>
+      <div class="a"><span>Sierra Madre</span><small>Village</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="grid">
+      <div class="reveal">
+        <span class="eyebrow">Let's Talk</span>
+        <h2>Help me help you <em>fight the empire.</em></h2>
+        <p class="lede">The predatory agents, the hidden fees, the "sign here, don't worry about it" — that's the dark side. Whether you're months away or just curious about the market, reach out. The first conversation is unhurried, jargon-free, and always on the house. (Yes, that pun was intentional. I have a teenager who's mortified.)</p>
+        <div class="contact-meta">
+          <a href="tel:+16265550147"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>(626) 555-0147</a>
+          <a href="mailto:dinesh@roseandreserve.com"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>dinesh@roseandreserve.com</a>
+          <a href="#top"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>Old Pasadena, CA</a>
+        </div>
+      </div>
+      <div class="form reveal">
+        <div class="field"><label>Name</label><input type="text" placeholder="Your name"></div>
+        <div class="field"><label>Email</label><input type="email" placeholder="you@email.com"></div>
+        <div class="field"><label>How can I help?</label><textarea placeholder="Buying, selling, or just exploring…"></textarea></div>
+        <button class="btn btn-primary" onclick="this.textContent='Thank you — I\'ll be in touch.'">Send Message</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="fbrand">
+      <svg width="22" height="22" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="19" stroke="#b06a6a" stroke-width="1.4"/><path d="M20 11c-3 0-5 2.2-5 5 0 2.4 1.6 4 3.3 4.8-1.9.5-3.8 2-3.8 4.7 0 .9.3 1.7.8 2.3M20 11c3 0 5 2.2 5 5 0 2.4-1.6 4-3.3 4.8 1.9.5 3.8 2 3.8 4.7 0 .9-.3 1.7-.8 2.3M20 11v18" stroke="#b06a6a" stroke-width="1.3" stroke-linecap="round"/></svg>
+      Rose <span class="amp">&amp;</span> Reserve
+    </div>
+    <div class="legal">© 2026 Rose &amp; Reserve · DRE #02xxxxxx · <a href="#top">Pasadena, California</a></div>
+  </div>
+</footer>
+
+<script>
+  const nav=document.getElementById('nav');
+  addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40));
+
+  const burger=document.getElementById('burger'),links=document.getElementById('navlinks');
+  burger.addEventListener('click',()=>links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
+
+  const io=new IntersectionObserver((e)=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.14});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%3*0.08)+'s';io.observe(el)});
+</script>
+</body>
+</html>
